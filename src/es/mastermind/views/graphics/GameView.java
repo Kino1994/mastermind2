@@ -6,18 +6,14 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import es.mastermind.controllers.ProposalController;
+import es.mastermind.controllers.PlayController;
 import es.mastermind.controllers.StartController;
 import es.mastermind.types.Color;
-import es.mastermind.types.Error;
-import es.mastermind.views.ErrorView;
 import es.mastermind.views.MessageView;
-import es.mastermind.views.graphics.ProposedCombinationView;
-import es.mastermind.views.graphics.SecretCombinationView;
 
 @SuppressWarnings("serial")
 class GameView extends JFrame {
-	
+
 	private static final String GAME_OVER = "Game Over";
 
 	private SecretCombinationView secretCombinationView;
@@ -47,27 +43,24 @@ class GameView extends JFrame {
 		this.setVisible(true);
 	}
 
-	void interact(ProposalController proposalController) {
-		Error error;
-		do {
-			List<Color> colors = new ProposedCombinationView().read(this.proposalCombinationView.getCharacters());
-			error = proposalController.addProposedCombination(colors);
-			if (error != null && this.proposalCombinationView.getCharacters() != "") {
-				JOptionPane.showMessageDialog(null, new ErrorView(error).getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
-				error = null;
-				this.proposalCombinationView.resetCharacters();
-			}
-		} while (error != null || this.proposalCombinationView.getCharacters() == "");
+	void interact(PlayController playController) {
+		List<Color> colors = new ProposedCombinationView().read(this.proposalCombinationView.getCharacters());
+		playController.put(colors);
 		this.proposalCombinationView.resetCharacters();
-		this.proposedCombinationsView.add(proposalController);
-		this.drawGameOver(proposalController);
+		this.proposalCombinationView.resetCharacters();
+		this.proposedCombinationsView.add(playController);
+		this.drawGameOver(playController);
+		this.setVisible(true);
+		this.proposalCombinationView.resetCharacters();
+		this.proposedCombinationsView.add(playController);
+		this.drawGameOver(playController);
 		this.setVisible(true);
 	}
 
-	private void drawGameOver(ProposalController proposalController) {
-		if (proposalController.isWinner() || proposalController.isLooser()) {
+	private void drawGameOver(PlayController playController) {
+		if (playController.isWinner() || playController.isLooser()) {
 			String message = "";
-			if (proposalController.isWinner()) {
+			if (playController.isWinner()) {
 				message = MessageView.WINNER.getMessage();
 			} else {
 				message = MessageView.LOOSER.getMessage();

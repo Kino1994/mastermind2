@@ -1,21 +1,21 @@
 package es.mastermind.views.console;
 
-import es.mastermind.controllers.ProposalController;
-import es.mastermind.views.MessageView;
+import es.mastermind.controllers.PlayController;
 import es.mastermind.utils.WithConsoleView;
+import es.mastermind.views.MessageView;
 
 class ResultView extends WithConsoleView {
 	
-	private ProposalController proposalController;
+	private PlayController playController;
 	
-	ResultView(ProposalController proposalController){
-		this.proposalController = proposalController;
+	ResultView(PlayController playController){
+		this.playController = playController;
 	}
 
 	void writeln(int i) {
 		this.console.writeln(MessageView.RESULT.getMessage()
-				.replaceFirst("#blacks", "" + this.proposalController.getBlacks(i))
-				.replaceFirst("#whites", "" + this.proposalController.getWhites(i)));
+				.replaceFirst("#blacks", "" + this.playController.getBlacks(i))
+				.replaceFirst("#whites", "" + this.playController.getWhites(i)));
 	}
 
 }

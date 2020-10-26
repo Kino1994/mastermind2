@@ -1,6 +1,6 @@
 package es.mastermind.views.console;
 
-import es.mastermind.controllers.ProposalController;
+import es.mastermind.controllers.PlayController;
 import es.mastermind.controllers.ResumeController;
 import es.mastermind.controllers.StartController;
 import es.mastermind.views.View;
@@ -25,8 +25,8 @@ public class ConsoleView extends View {
 	}
 
 	
-	public void visit(ProposalController proposalController) {
-		this.proposalView.interact(proposalController);
+	public void visit(PlayController playController) {
+		this.proposalView.interact(playController);
 	}
 
 	

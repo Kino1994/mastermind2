@@ -3,22 +3,21 @@ package es.mastermind.views.console;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.mastermind.controllers.ProposalController;
+import es.mastermind.controllers.PlayController;
 import es.mastermind.types.Color;
-import es.mastermind.views.console.ColorView;
 import es.mastermind.utils.WithConsoleView;
 import es.mastermind.views.MessageView;
 
 class ProposedCombinationView extends WithConsoleView {
 	
-	private ProposalController proposalController;
+	private PlayController playController;
 	
-	ProposedCombinationView(ProposalController proposalController) {
-		this.proposalController = proposalController;
+	ProposedCombinationView(PlayController playController) {
+		this.playController = playController;
 	}
 	
 	void write(int position) {
-		for (Color color : this.proposalController.getColors(position)) {
+		for (Color color : this.playController.getColors(position)) {
 			new ColorView(color).write();
 		}
 	}

@@ -15,16 +15,16 @@ import javax.swing.JTextField;
 import es.mastermind.views.MessageView;
 
 @SuppressWarnings("serial")
-class ProposalCombinationView extends JPanel implements ActionListener, KeyListener{
-	
+class ProposalCombinationView extends JPanel implements ActionListener, KeyListener {
+
 	private static final String ACCEPT = "Aceptar";
-	
+
 	private JLabel label;
-	
+
 	private JTextField textField;
-	
+
 	private JButton button;
-	
+
 	private String characters;
 
 	ProposalCombinationView(JRootPane rootPane) {
@@ -37,28 +37,26 @@ class ProposalCombinationView extends JPanel implements ActionListener, KeyListe
 		rootPane.setDefaultButton(this.button);
 		this.button.addActionListener(this);
 		this.button.addKeyListener(this);
-		this.add(button, new Constraints(0, 2, 1, 1));	
+		this.add(button, new Constraints(0, 2, 1, 1));
 		this.resetCharacters();
 	}
 
-	
 	public void actionPerformed(ActionEvent event) {
 		this.characters = this.textField.getText();
 		this.textField.setText("");
 	}
 
-	
 	public void keyPressed(KeyEvent e) {
 		this.characters = this.textField.getText();
 		this.textField.setText("");
 	}
 
-	
 	public void keyReleased(KeyEvent e) {
+		
 	}
 
-	
 	public void keyTyped(KeyEvent e) {
+		
 	}
 
 	String getCharacters() {

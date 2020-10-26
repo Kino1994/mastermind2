@@ -1,20 +1,18 @@
 package es.mastermind.controllers;
 
-import es.mastermind.models.Game;
-import es.mastermind.models.State;
+import es.mastermind.models.Session;
 
 public class ResumeController extends Controller {
 
-	public ResumeController(Game game, State state) {
-		super(game, state);
+	public ResumeController(Session session) {
+		super(session);
 	}
-	
+
 	public void resume(boolean newGame) {
 		if (newGame) {
-			this.game.clear();
-			this.state.reset();
+			this.session.reset();
 		} else {
-			this.state.next();
+			this.session.next();
 		}
 	}
 

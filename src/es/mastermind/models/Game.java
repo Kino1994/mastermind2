@@ -28,7 +28,7 @@ public class Game {
 		this.attempts = 0;
 	}
 
-	public void addProposedCombination(List<Color> colors) {
+	public void put(List<Color> colors) {
 		ProposedCombination proposedCombination = new ProposedCombination(colors);
 		this.proposedCombinations.add(proposedCombination);
 		this.results.add(this.secretCombination.getResult(proposedCombination));
@@ -38,13 +38,25 @@ public class Game {
 	public boolean isLooser() {
 		return this.attempts == Game.MAX_LONG;
 	}
-	
+
 	public boolean isWinner() {
-		return this.results.get(this.attempts-1).isWinner();
+		return this.results.get(this.attempts - 1).isWinner();
+	}
+	
+	public boolean isBoardComplete() {
+		return this.attempts == MAX_LONG;
 	}
 
 	public int getAttempts() {
 		return this.attempts;
+	}
+	
+	public ProposedCombination getProposedCombination() {
+		return this.getCombination(proposedCombinations.size() - 1);
+	}
+	
+	public ProposedCombination getCombination(int position) {
+		return this.proposedCombinations.get(position);
 	}
 
 	public List<Color> getColors(int position) {
@@ -62,5 +74,24 @@ public class Game {
 	public int getWidth() {
 		return Combination.getWidth();
 	}
+	
+	public GameMemento createMemento() {
+        return new GameMemento(this.secretCombination, this.proposedCombinations, this.results, this.attempts);
+	}
 
+	public void set(GameMemento memento) {
+		this.secretCombination = memento.getSecretCombination();
+		this.proposedCombinations = new ArrayList<ProposedCombination>();
+		this.results = new ArrayList<Result>();
+		this.attempts = memento.getAttempts();
+		
+        for(ProposedCombination proposedCombination : memento.getProposedCombinations()){
+        	this.proposedCombinations.add(proposedCombination);
+        }
+        
+        for(Result result : memento.getResults()){
+        	this.results.add(result);
+        }        
+    }
+	
 }

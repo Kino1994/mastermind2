@@ -1,16 +1,15 @@
 package es.mastermind.controllers;
 
-import es.mastermind.models.Game;
-import es.mastermind.models.State;
+import es.mastermind.models.Session;
 
 public class StartController extends Controller {
 
-	public StartController(Game game, State state) {
-		super(game, state);
+	public StartController(Session session) {
+		super(session);
 	}
 	
 	public void start() {
-		this.state.next();
+		this.session.next();
 	}
 	
 	@Override

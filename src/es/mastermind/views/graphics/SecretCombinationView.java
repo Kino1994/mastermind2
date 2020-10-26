@@ -16,7 +16,7 @@ class SecretCombinationView extends JPanel {
 	private JLabel title;
 
 	private JLabel secretCombination;
-	
+
 	private StartController startController;
 
 	SecretCombinationView(StartController startController) {

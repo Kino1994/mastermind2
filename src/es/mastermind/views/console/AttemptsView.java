@@ -1,20 +1,20 @@
 package es.mastermind.views.console;
 
-import es.mastermind.controllers.ProposalController;
-import es.mastermind.views.MessageView;
+import es.mastermind.controllers.PlayController;
 import es.mastermind.utils.WithConsoleView;
+import es.mastermind.views.MessageView;
 
 public class AttemptsView extends WithConsoleView {
 
-	private ProposalController proposalController;
+	private PlayController playController;
 
-	AttemptsView(ProposalController proposalController) {
-		this.proposalController = proposalController;
+	AttemptsView(PlayController playController) {
+		this.playController = playController;
 	}
 
 	void writeln() {
 		this.console.writeln(MessageView.ATTEMPTS.getMessage().replaceFirst("#attempts",
-				"" + this.proposalController.getAttempts()));
+				"" + this.playController.getAttempts()));
 	}
 
 }
