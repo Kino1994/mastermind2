@@ -1,41 +1,36 @@
 package es.mastermind.views;
 
-import es.mastermind.controllers.AcceptorController;
-import es.mastermind.controllers.ControllersVisitor;
 import es.mastermind.controllers.PlayController;
 import es.mastermind.controllers.ResumeController;
 import es.mastermind.controllers.StartController;
 
-public class View implements ControllersVisitor {
-
-    private StartView startView;
-
-	private PlayView playView;
-
+public class ConsoleView extends View {
+	
+	private StartView startView;
+	
+	private ProposalView proposalView;
+	
 	private ResumeView resumeView;
-
-	public View() {
+	
+	public ConsoleView(){
 		this.startView = new StartView();
-		this.playView = new PlayView();
+		this.proposalView = new ProposalView();
 		this.resumeView = new ResumeView();
-	}
-
-	public void interact(AcceptorController acceptorController) {
-		acceptorController.accept(this);
 	}
 
 	
 	public void visit(StartController startController) {
-		this.startView.interact(startController);
+		this.startView.interact(startController);		
 	}
 
 	
 	public void visit(PlayController playController) {
-		this.playView.interact(playController);
+		this.proposalView.interact(playController);
 	}
 
 	
 	public void visit(ResumeController resumeController) {
 		this.resumeView.interact(resumeController);
 	}
+
 }

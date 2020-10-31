@@ -1,6 +1,7 @@
 package es.mastermind.views;
 
 import es.mastermind.types.Color;
+import es.mastermind.utils.Console;
 
 public class ColorView {
 
@@ -31,6 +32,10 @@ public class ColorView {
 			}
 		}
 		return null;
+	}
+	
+	void write() {
+		new Console().write(ColorView.INITIALS[this.color.ordinal()]);
 	}
 
 }

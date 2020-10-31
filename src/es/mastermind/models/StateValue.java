@@ -1,9 +1,8 @@
 package es.mastermind.models;
 
 public enum StateValue {
-	INITIAL,
+    INITIAL,
 	IN_GAME,
-	FINAL,
-	EXIT;
-	
+    RESUME,
+    EXIT;
 }

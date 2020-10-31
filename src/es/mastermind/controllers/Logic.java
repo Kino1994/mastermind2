@@ -8,21 +8,16 @@ import es.mastermind.models.StateValue;
 
 public class Logic {
 
-	private Session session;
+	protected Session session;
+	
+	protected Map<StateValue, AcceptorController> acceptorControllers;
 
-	private Map<StateValue, Controller> controllers;
-
-	public Logic() {
-		this.session = new Session();
-		this.controllers = new HashMap<StateValue, Controller>();
-		this.controllers.put(StateValue.INITIAL, new StartController(this.session));
-		this.controllers.put(StateValue.IN_GAME, new PlayController(this.session));
-		this.controllers.put(StateValue.FINAL, new ResumeController(this.session));
-		this.controllers.put(StateValue.EXIT, null);
+	protected Logic() {
+		this.acceptorControllers = new HashMap<StateValue, AcceptorController>();
 	}
-
-	public Controller getController() {
-		return this.controllers.get(this.session.getValueState());
+	
+	public AcceptorController getController() {
+		return this.acceptorControllers.get(this.session.getValueState());
 	}
-
+    
 }

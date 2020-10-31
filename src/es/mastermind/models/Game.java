@@ -59,8 +59,8 @@ public class Game {
 		return this.proposedCombinations.get(position);
 	}
 
-	public List<Color> getColors(int position) {
-		return this.proposedCombinations.get(position).colors;
+	public List<Color> getColors() {
+		return this.proposedCombinations.get(proposedCombinations.size()-1).colors;
 	}
 
 	public int getBlacks(int position) {
@@ -75,11 +75,11 @@ public class Game {
 		return Combination.getWidth();
 	}
 	
-	public GameMemento createMemento() {
-        return new GameMemento(this.secretCombination, this.proposedCombinations, this.results, this.attempts);
+	public Memento createMemento() {
+        return new Memento(this.secretCombination, this.proposedCombinations, this.results, this.attempts);
 	}
 
-	public void set(GameMemento memento) {
+	public void set(Memento memento) {
 		this.secretCombination = memento.getSecretCombination();
 		this.proposedCombinations = new ArrayList<ProposedCombination>();
 		this.results = new ArrayList<Result>();

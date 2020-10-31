@@ -6,77 +6,42 @@ import es.mastermind.models.ProposedCombination;
 import es.mastermind.models.Session;
 import es.mastermind.types.Color;
 
-public class PlayController extends Controller  {
+public abstract class PlayController extends AcceptorController  {
 
-	private ActionController actionController;
-	private UndoController undoController;
-	private RedoController redoController;
 
-	public PlayController(Session session) {
+    public PlayController(Session session) {
 		super(session);
-		this.actionController = new ActionController(session);
-		this.undoController = new UndoController(session);
-		this.redoController = new RedoController(session);
-	}
-
-	public boolean isBoardComplete() {
-		return this.actionController.isBoardComplete();
-	}
-
-	public boolean isWinner() {
-		return this.actionController.isWinner();
-	}
-
-	public ProposedCombination getProposedCombination() {
-		return this.actionController.getProposedCombination();
-	}
-
-	public void put(List<Color> colors) {
-		this.actionController.put(colors);
-	}
+    }
 	
-	public List<Color> getColors(int position) {
-		return this.actionController.getColors(position);
-	}
+	public abstract void put(List<Color> colors);
 	
-	public int getAttempts() {
-		return this.actionController.getAttempts();
-	}
-
-	public int getWidth() {
-		return this.actionController.getWidth();
-	}
+	public abstract List<Color> getColors();
 	
-	public int getBlacks(int position) {
-		return this.actionController.getBlacks(position);
-	}
+	public abstract ProposedCombination getProposedCombination();
+		
+	public abstract int getAttempts(); 	
 
-	public int getWhites(int position) {
-		return this.actionController.getWhites(position);
-	}
+	public abstract int getWhites(int position);
 	
-	public boolean isLooser() {
-		return this.actionController.isLooser();
-	}
+	public abstract int getBlacks(int position);	
 	
-	public void undo() {
-		this.undoController.undo();
-	}
+	public abstract boolean isLooser(); 
+	
+	public abstract boolean isWinner();
+	
+	public abstract boolean isBoardComplete();	
+	
+	public abstract void undo(); 	
 
-	public boolean undoable() {
-		return this.undoController.undoable();
-	}
+	public abstract boolean undoable(); 	
 
-	public void redo() {
-		this.redoController.redo();
-	}
+	public abstract void redo(); 	
 
-	public boolean redoable() {
-		return this.redoController.redoable();
-	}
+	public abstract boolean redoable(); 	
 
 	@Override
 	public void accept(ControllersVisitor controllersVisitor) {
 		controllersVisitor.visit(this);		
 	}
+	
 }
