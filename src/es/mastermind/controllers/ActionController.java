@@ -2,13 +2,19 @@ package es.mastermind.controllers;
 
 import java.util.List;
 
+import es.mastermind.models.GameView;
+import es.mastermind.models.ProposedCombination;
 import es.mastermind.models.Session;
 import es.mastermind.types.Color;
+import es.mastermind.utils.Console;
 
-public class ActionController extends UseCaseController {
+public class ActionController extends InGameController {
+	
+	private GameView gameView;
 
-	public ActionController(Session session) {
-		super(session);
+	public ActionController(Console console, Session session) {
+		super(console,session);
+		this.gameView = new GameView(console, session);
 	}
 
 	public boolean isBoardComplete() {
@@ -21,6 +27,10 @@ public class ActionController extends UseCaseController {
 	
 	public void put(List<Color> colors) {
 		this.session.put(colors);
+	}
+	
+	public ProposedCombination getProposedCombination() {
+		return this.session.getProposedCombination();
 	}
 	
 	public List<Color> getColors(int position) {
@@ -47,5 +57,20 @@ public class ActionController extends UseCaseController {
 		return this.session.isLooser();
 	}
 	
+	@Override
+	public void control() {
+		int i = 0;
+		while (!this.isBoardComplete() || !isWinner()) {
+			gameView.readpProposedCOmbination();
+			gameView.writeBlackAndWhites(i);
+			i++;
+		}
+	}
+
+	@Override
+	protected void inGameControl() {
+		
+	}
+
 	
 }

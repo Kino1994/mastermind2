@@ -6,6 +6,8 @@ public enum MessageView {
 	RESUME("Do you want to continue"),
 	RESULT(" --> #blacks blacks and #whites whites"),
 	PROPOSED_COMBINATION("Propose a combination: "),
+	UNDO_COMMAND("Undo previous movement"), 
+	REDO_COMMAND("Redo previous movement"),
 	TITLE("----- MASTERMIND -----"),
 	WINNER("You've won!!! ;-)"),
 	LOOSER("You've lost!!! :-(");

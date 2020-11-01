@@ -1,6 +1,7 @@
 package es.mastermind.controllers;
 
 import es.mastermind.models.Session;
+import es.mastermind.views.ResumeView;
 
 public class ResumeController extends Controller {
 
@@ -8,17 +9,16 @@ public class ResumeController extends Controller {
 		super(session);
 	}
 
-	public void resume(boolean newGame) {
-		if (newGame) {
-			this.session.reset();
-		} else {
-			this.session.next();
-		}
-	}
-
 	@Override
-	public void accept(ControllersVisitor controllersVisitor) {
-		controllersVisitor.visit(this);
+	public void control() {
+		if (session.isBoardComplete()) {
+			if(new ResumeView().read()) {
+				this.session.reset();
+			}
+			else {
+				this.session.next();
+			}
+		}
 	}
 
 }

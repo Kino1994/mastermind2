@@ -1,20 +1,18 @@
 package es.mastermind.controllers;
 
 import es.mastermind.models.Session;
+import es.mastermind.views.StartView;
 
 public class StartController extends Controller {
-
-	public StartController(Session session) {
+    
+    public StartController(Session session) {
 		super(session);
 	}
-	
-	public void start() {
-		this.session.next();
-	}
-	
-	@Override
-	public void accept(ControllersVisitor controllersVisitor) {
-		controllersVisitor.visit(this);
-	}
 
+	@Override
+	public void control() {
+		this.session.next();
+		new StartView().write();
+	}
+	
 }
